@@ -22,8 +22,11 @@ module Raven
       def conn
         @conn ||= begin
           uri = URI.parse(self.configuration.server)
-
-          ::Fluent::Logger::FluentLogger.new('sentry', host: uri.host, port: uri.port)
+          if uri.query == 'console'
+            ::Fluent::Logger::ConsoleLogger.new(STDOUT)
+          else
+            ::Fluent::Logger::FluentLogger.new('sentry', host: uri.host, port: uri.port)
+          end
         end
       end
     end

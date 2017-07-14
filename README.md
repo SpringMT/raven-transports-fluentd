@@ -32,6 +32,17 @@ Raven.configure do |config|
 end
 ```
 
+
+To see logs at the STDOUT, add `console` as a query paramater to the fluentd uri.
+
+```Ruby
+Raven.configure do |config|
+  config.dsn = "fluentd://#{ENV['SENTRY_PUBLIC_KEY']}:#{ENV['SENTRY_SECRET_KEY']}@localhost:24224/2?console"
+end
+```
+
+
+
 ## Contributing
 
 1. Fork it ( https://github.com/cookpad/raven-transports-fluent/fork )
